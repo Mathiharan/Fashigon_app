@@ -1,0 +1,10 @@
+1. Issue in connecting Mongo DB:
+	- Connecting with my mobile network. DNS is blocking other network via firewall.
+	- Use CORS for fixing.
+2. Need to add images to fall back when the server fails to fetch the actual image from the backend. 
+	- Need to write this logic for categories and the items.
+3. Bug in adding image wrong format and uploading in "UPLOAD" screen.
+	- Keeps buffering for so many minutes.
+4. Bug in UPLOAD screen: It allows to add multiple pics, where it need to check if a pic already added, it shouldn't allow anymore.
+5. Upload screen: Set the name, description and all the states to null after loading a product
+6. Server is dead slow.

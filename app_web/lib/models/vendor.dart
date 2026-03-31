@@ -1,0 +1,56 @@
+import 'dart:convert';
+
+class Vendor {
+  // Define the properties of the Vendor class
+  final String id;
+  final String fullName;
+  final String email;
+  final String state;
+  final String city;
+  final String locality;
+  final String role;
+  final String password;
+
+  Vendor({
+    required this.id,
+    required this.fullName,
+    required this.email,
+    required this.state,
+    required this.city,
+    required this.locality,
+    required this.role,
+    required this.password,
+  });
+
+  //Converting to Map so that we can easily convert to JSON, and this is because the data will be stored in the database in JSON format.
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'FullName': fullName,
+      'email': email,
+      'state': state,
+      'city': city,
+      'locality': locality,
+      'role': role,
+      'password': password,
+    };
+  }
+
+  //Converting to JSON so that we can easily convert to Map, and this is because the data will be stored in the database in JSON format.
+  String toJson() => json.encode(toMap());
+
+  // Converting back to the vendor user object so that we can make use of it within our application.
+  factory Vendor.fromMap(Map<String, dynamic> map) {
+    return Vendor(
+      id: map['_id'] as String? ?? '',
+      fullName: map['FullName'] as String? ?? '',
+      email: map['email'] as String? ?? '',
+      state: map['state'] as String? ?? '',
+      city: map['city'] as String? ?? '',
+      locality: map['locality'] as String? ?? '',
+      role: map['role'] as String? ?? '',
+      password: map['password'] as String? ?? '',
+    );
+  }
+}

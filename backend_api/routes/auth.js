@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const authRouter = express.Router();
 const orderRouter = require('./order'); // Importing orderRouter to use in authRouter
 const jwt = require('jsonwebtoken');
+const { jwtSecret } = require('../config/env');
 
 authRouter.post('/api/signup', async (req, res) => {
     try {
@@ -41,7 +42,7 @@ authRouter.post('/api/signin', async (req, res) => {
         else {
             await bcrypt.compare(password, findUser.password).then((isMatch) => {
                 if (isMatch) {
-                    const token = jwt.sign({ id: findUser._id }, "passwordKey");
+                    const token = jwt.sign({ id: findUser._id }, jwtSecret);
 
                     // Extract the password from the document (user from mongodb), and everything else except
                     // password will be stored into userWithoutPassword. (remove sensitive info)

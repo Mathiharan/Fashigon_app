@@ -1,4 +1,4 @@
-// Import the express module
+const { port: PORT, mongodbUri: DB } = require('./config/env');
 const express = require('express');
 const cors = require('cors');
 const mongoose = require("mongoose");
@@ -10,9 +10,7 @@ const productRouter = require('./routes/product');
 const productReviewRouter = require('./routes/product_review');
 const vendorRouter = require('./routes/vendor');
 const orderRouter = require('./routes/order');
-// Define the port number the server will listen on
-const PORT = 3000;
-
+const helloRouter = require('./routes/hello');
 // Create an instance of an Express application
 // because it gives us the starting point for building our web server
 const app = express();
@@ -20,12 +18,10 @@ const app = express();
 // Enable CORS for all routes and origins.
 app.use(cors());
 
-// mongodb string
-const DB = "mongodb+srv://mathiharan:Mathiharan2018@cluster0.wkvghmz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
 //middleware - to register routes or to mount routes
 app.use(express.json());
 app.use(cors()); // enable CORS for all routes and origin
+app.use(helloRouter);
 app.use(authRouter);
 app.use(bannerRouter);
 app.use(categoryRouter);

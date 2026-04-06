@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Vendor = require('../models/vendor');
+const { jwtSecret } = require('../config/env');
 
 // authentication middleware to verify JWT token
 // this middleware function checks if the user is authenticated
@@ -15,7 +16,7 @@ const auth = async (req, res, next) => {
         if (!token) return res.status(401).json({ msg: "No authentication token, authorization denied." });
 
         // Verify the jwt token using the secret key
-        const verified = jwt.verify(token, "passwordKey");
+        const verified = jwt.verify(token, jwtSecret);
         // If the token verification failed, return 401,
         if (!verified) return res.status(401).json({ msg: "Token verification failed, authorization denied." });
 

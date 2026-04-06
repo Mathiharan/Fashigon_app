@@ -3,6 +3,7 @@ const Vendor = require('../models/vendor');
 const vendorRouter = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { jwtSecret } = require('../config/env');
 
 vendorRouter.post('/api/vendor/signup', async (req, res) => {
     try {
@@ -40,7 +41,7 @@ vendorRouter.post('/api/vendor/signin', async (req, res) => {
         else {
             await bcrypt.compare(password, findUser.password).then((isMatch) => {
                 if (isMatch) {
-                    const token = jwt.sign({ id: findUser._id }, "passwordKey");
+                    const token = jwt.sign({ id: findUser._id }, jwtSecret);
 
                     // Extract the password from the document (user from mongodb), and everything else except
                     // password will be stored into userWithoutPassword. (remove sensitive info)
